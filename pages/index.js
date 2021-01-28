@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import db from '../db.json';
@@ -8,6 +7,9 @@ import QuizLogo from '../src/components/QuizLogo';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
+import QuizContainer from '../src/components/QuizContainer';
 
 // const BackgroundImage = styled.div`
 //   background-image: url(${db.bg});
@@ -15,17 +17,6 @@ import QuizBackground from '../src/components/QuizBackground';
 //   background-size: cover;
 //   background-position: center;
 // `;
-
-export const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
 
 export default function Home() {
   const router = useRouter();
@@ -51,23 +42,18 @@ export default function Home() {
               }
             }
             >
-              <input
-                onChange={
-                  function (event) {
-                    console.log(event.target.value);
-                    setName(event.target.value);
-                  }
-                }
+              <Input
+                name="user"
+                onChange={(event) => setName(event.target.value)}
                 placeholder="Diz aí seu nome"
+                value={name}
               />
-              <button
+              <Button
                 type="submit"
                 disabled={name.length === 0}
               >
-                Jogar
-                {' '}
-                {name}
-              </button>
+                {`Jogar ${name}`}
+              </Button>
             </form>
           </Widget.Content>
         </Widget>
